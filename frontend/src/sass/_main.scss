@@ -26,7 +26,8 @@ html {
   padding: 0;
 }
 
-.container{
+.contains{
   display: grid;
-  grid-template-columns: repeat(12, minmax(12rem, 1fr));
+  grid-template-columns:[full-start] minmax(3vw, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 8vw) [col-end]) [center-end] minmax(3vw, 1fr) [full-end];
+  // grid-template-columns:[full-start] minmax(3rem, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 14.4rem) [col-end]) [center-end] minmax(3rem, 1fr) [full-end];
 }
