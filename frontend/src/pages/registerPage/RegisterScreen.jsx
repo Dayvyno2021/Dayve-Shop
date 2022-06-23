@@ -38,7 +38,7 @@ const RegisterScreen = () => {
   return (
     <div className='register--container'>
       {loading && <Spinner />}
-      {error && <Alert>{error}</Alert>}
+      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit} className='register'>
         <div className="register--heading"><i className="">Register</i></div>
         <div className="login--control name">

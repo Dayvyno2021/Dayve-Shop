@@ -1,9 +1,21 @@
-import { ADD_TO_CART_REQUEST, ADD_TO_CART_SUCCESS, REMOVE__FROM__CART } from "../constants/cartConstants";
+import { ADD_TO_CART_REQUEST, ADD_TO_CART_SUCCESS, EMPTY_CART, PAYMENT_METHOD, REMOVE__FROM__CART, SHIPPING_DETAILS } from "../constants/cartConstants";
 
 const cartItemFromStorage = localStorage.getItem('cartItems') ? 
   JSON.parse(localStorage.getItem('cartItems')) : [];
 
-export const cartReducer = (state={cartItems:cartItemFromStorage}, action) =>{
+  const shippingDetails = localStorage.getItem('shipping')?
+  JSON.parse(localStorage.getItem('shipping')) : {};
+
+  const localStoragePayment = localStorage.getItem('paymentMethod')?
+  JSON.parse(localStorage.getItem('paymentMethod')) : '';
+
+export const cartReducer = (state=
+  {
+    cartItems:cartItemFromStorage, 
+    shipping:shippingDetails, 
+    paymentMethod: localStoragePayment
+  }, 
+  action) =>{
   switch (action.type) {
     case ADD_TO_CART_REQUEST:
       return {...state, loading: true}
@@ -27,6 +39,15 @@ export const cartReducer = (state={cartItems:cartItemFromStorage}, action) =>{
         ...state,
         cartItems: state.cartItems.filter(x=>x.product !== action.payload)
       }
+    
+    case SHIPPING_DETAILS: 
+      return {...state, shipping: action.payload}
+
+    case PAYMENT_METHOD:
+      return {...state, paymentMethod: action.payload}
+
+    case EMPTY_CART:
+      return {cartItems:[]};
   
     default:
       return state;

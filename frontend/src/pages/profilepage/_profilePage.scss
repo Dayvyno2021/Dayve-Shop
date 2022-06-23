@@ -28,8 +28,8 @@
 
   &--close{
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 3rem;
+    right: 3rem;
     width: 2rem;
     height: 2rem;
     background-color: transparent;
@@ -60,11 +60,12 @@
 
 .profile2{
   background-color: $color-grey-light;
-  padding: 2rem;
+  padding: 2rem 1rem;
   border-radius: 5px;
   margin-bottom: 10rem;
   grid-column: 1 / 2;
   margin-right: 2rem;
+  height: min-content;
   @include bs-light;
 
   & > *{
@@ -80,6 +81,7 @@
   .profile--input {
     outline: none;
     border: none;
+    padding: 0.5rem 1rem;
   }
 }
 
@@ -102,9 +104,33 @@
 }
 
 .profile3 {
+  background-color: $color-grey-light;
+  border-radius: 5px;
+  padding: 2rem 1rem;
   grid-column: 2/-1;
+  padding-top: 0.1rem;
+  font-size: 1.2rem;
+  .profile3--heading{
+    padding: 0.5rem;
+  }
 }
 
 .update__submit{
   padding: 0.8rem 1rem;
+}
+
+.profile3--table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tbody:nth-child(even) {
+    background-color: #dddddd;
+  }
 }

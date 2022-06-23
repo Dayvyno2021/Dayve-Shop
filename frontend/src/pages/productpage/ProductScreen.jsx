@@ -104,7 +104,7 @@ const ProductScreen = () => {
 
             </select>
           </div>
-          <button className="btn-add btn-n" type='submit' disabled={pro.countInStock===0} >Add to Cart</button>
+          <button className="btn-add btn1" type='submit' disabled={pro.countInStock===0} >Add to Cart</button>
         </form>
         )}
       </div>

@@ -1,7 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { cartReducer } from './reducers/cartReducers';
+import { 
+  myOrderDeleteReducer, 
+  myOrdersReducers, 
+  orderDetailsReducer, 
+  orderPaidreducer, 
+  placeOrderReducer 
+} from './reducers/orderReducers';
 import { productDetailsReducer, productListReducer } from './reducers/productReducers';
-import { userLoginReducer, userProfileReducer, userRegisterReducer, userUpdateReducer } from './reducers/userReducers';
+import { 
+  adminEditUserReducer, 
+  deleteUserReducer, 
+  makeAdminReducer, 
+  userLoginReducer, 
+  userProfileReducer, 
+  userRegisterReducer, 
+  usersListReducer, 
+  userUpdateReducer
+ } from './reducers/userReducers';
 
 
 const store = configureStore ({
@@ -12,7 +28,16 @@ const store = configureStore ({
     userRegisterReducer: userRegisterReducer,
     userLoginReducer: userLoginReducer,
     userProfileReducer: userProfileReducer,
-    userUpdateReducer: userUpdateReducer
+    userUpdateReducer: userUpdateReducer,
+    placeOrderReducer: placeOrderReducer,
+    orderDetailsReducer: orderDetailsReducer,
+    orderPaidreducer: orderPaidreducer,
+    myOrdersReducers: myOrdersReducers,
+    myOrderDeleteReducer: myOrderDeleteReducer,
+    usersListReducer: usersListReducer,
+    adminEditUserReducer: adminEditUserReducer,
+    makeAdminReducer: makeAdminReducer,
+    deleteUserReducer: deleteUserReducer
   },
 })
 

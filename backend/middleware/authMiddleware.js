@@ -20,3 +20,17 @@ export const protect = async (req, res, next) => {
     res.status(400).json({meessage: 'Could not authencate user'})
   }
 }
+
+export const adminProtect = async(req, res, next) =>{
+  try {
+    if (req.user.isAdmin) {
+      next();
+    } else{
+      res.status(400).json({message: 'Unauthorized User(only admins)'})
+    }
+    
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error
+    res.status(404).json({message: `Server Error===> ${m}`})
+  }
+}

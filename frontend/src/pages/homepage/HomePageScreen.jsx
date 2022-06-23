@@ -23,7 +23,7 @@ const HomePageScreen = () => {
       <h1 className="homepage--heading">Latest Products</h1>
       <div className="homepage--products">
         {
-          products.map((product)=>(
+          products && products.map((product)=>(
             <Product product={product} key={product._id} />
           ))
         }

@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { userProfileAction, userUpdateAction } from '../../actions/userActions';
+import {/*userProfileAction,  */ userUpdateAction } from '../../actions/userActions';
 import Spinner from '../../components/spinner/Spinner'
+import { Link } from 'react-router-dom';
 import Alert from '../../components/alert/Alert'
+import { myOrderDeleteAction, myOrdersAction } from '../../actions/orderActions';
+import { MY_ORDER_DELETE_RESET } from '../../constants/orderConstants';
+// import ProfileOrders from './ProfileOrders';
 
 const ProfileScreen = ({handleShow}) => {
   const dispatch = useDispatch();
@@ -11,9 +15,24 @@ const ProfileScreen = ({handleShow}) => {
   const userUpdateReducer = useSelector((state)=>state.userUpdateReducer);
   const {loading: uLoading, error:uError} = userUpdateReducer;
 
+  const myOrdersReducers = useSelector((state)=>state.myOrdersReducers);
+  const {orders, loading: loadingOrder} = myOrdersReducers;
+
+  const myOrderDeleteReducer = useSelector((state)=>state.myOrderDeleteReducer);
+  const {successDel} = myOrderDeleteReducer
+
   useEffect(()=>{
-    if (!user) dispatch(userProfileAction())
-  }, [dispatch, user])
+    // if (!user) {
+    //   dispatch(userProfileAction())
+    // }
+    // if (!success){
+    //   dispatch(myOrdersAction())
+    // }
+    if (!orders || successDel){
+      dispatch({type:MY_ORDER_DELETE_RESET})
+      dispatch(myOrdersAction())
+    }
+  }, [dispatch, orders, successDel])
 
   const [uInput, setUinput] = useState(
     {
@@ -43,16 +62,22 @@ const ProfileScreen = ({handleShow}) => {
     return `${updated[2]}-${updated[1]}-${updated[0]}`
   }
 
+  const deleteOrder = (id) =>{
+    if (window.confirm("Want to delete user?")){
+      dispatch(myOrderDeleteAction(id))
+    }
+  }
+
   // https://i.pravatar.cc/300
   // https://robohash.org/${user && user.name}.png?size=100x100
 
   return (
     <div className='profile--container'>
-      {(loading || uLoading) && <Spinner />}
-      {(error || uError) && <Alert>{error}</Alert>}
+      {(loading || uLoading || loadingOrder) && <Spinner />}
+      {(error || uError) && <Alert message={error} />}
       <div className="profile">
         <button onClick={handleShow} className='profile--close'>
-          <svg className=""><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>
+          <svg className="icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>
         </button>
         <img src={`https://i.pravatar.cc/100`} alt="" className="profile--image" />
         <form className="profile2">
@@ -113,8 +138,56 @@ const ProfileScreen = ({handleShow}) => {
             onClick={submitUpdate}
           />
         </form>
-        <div className="profile3 bold7">
-          ORDER DETAILS
+        <div className="profile3">
+          <h2 className="profile3--heading"><i className="">My Orders</i></h2>
+          <table className="profile3--table">
+            <thead className="">
+              <tr className='profile--row'>
+                <th>ORDER ID</th>
+                <th>DATE</th>
+                <th>TOTAL(&#8358;)</th>
+                <th>PAID</th>
+                <th>PAYMENT MTD</th>
+                <th>DELIVERED</th>
+                <th>DETAILS</th>
+                <th>DEL</th>
+              </tr>
+            </thead>
+
+          { orders && orders.map((order)=>(
+            <tbody  className="profile--row" key={order._id}>
+              <tr>
+                <td>{order._id}</td>
+                <td>{order && datedCreated(order)}</td>
+                <td>{(order.totalPrice).toLocaleString()}</td>
+                <td>
+                  {order.isPaid?
+                  (<svg className="icon-green"><use xlinkHref="/img/symbol-defs.svg#icon-checkbox-checked"></use></svg>) 
+                  : 
+                  (<svg className="icon-red"><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>)
+                  }
+                </td>
+                <td>{order.paymentMethod}</td>
+                <td>
+                  {order.isDelivered? 
+                  (<svg className="icon-green"><use xlinkHref="/img/symbol-defs.svg#icon-checkbox-checked"></use></svg>) 
+                  : 
+                  (<svg className="icon-red"><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>)
+                  }
+                </td>
+                <td >
+                  <Link to={`/order/${order._id}`} className='rm-deco2' onClick={handleShow} >
+                    Details
+                  </Link>
+                </td>
+                <td onClick={()=>deleteOrder(order._id)}>
+                  <svg className="icon1"><use xlinkHref="/img/symbol-defs.svg#icon-bin"></use></svg>
+                </td>
+              </tr>
+            </tbody>
+            ))
+          }
+          </table>
         </div>
       </div>
     </div>

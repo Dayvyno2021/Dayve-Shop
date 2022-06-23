@@ -25,23 +25,20 @@
     fill: $color-white;
   }
 
-  &--icon-pro{
+  &--icon-grey{
     @include icons;
-    fill: limegreen;
-  }
-
-  &--icon-switch{
-    @include icons;
-    fill: orangered;
+    fill: $color-grey;
+    position:relative;
+    transform: translateY(3px);
   }
 
   .home{
     margin-right: auto;
   }
 
-  &--control {
-    display: none;
-  }
+  // &--control {
+  //   // display: none;
+  // }
 }
 
 .link{
@@ -68,8 +65,4 @@
 .styled-font {
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-shadow: 4px 4px 8px rgba($color-white, 0.5);
-}
-
-.logout{
-  color: orangered;
 }

@@ -27,9 +27,7 @@ export const register = async(req, res) => {
         name: newUser.name,
         email: newUser.email,
         token: genToken (newUser._id),
-        isAdmin: newUser.isAdmin,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
+        isAdmin: newUser.isAdmin
       })
     } else {
       res.status(400).json({message: 'Could not register user'})
@@ -125,23 +123,89 @@ export const updateUser = async(req, res) =>{
       res.status(400).json({message: 'Could not find user'})
     }
 
-    // if (user){
-    //   const update = await user.update({
-    //     name,
-    //     password
-    //   })
-    //   if (update){
-
-    //     })
-    //   }
-    //   res.status(400).json({message: 'Could not retrieve new update'})
-
-    // } else {
-    //   res.status(400).json({message: 'Could not update user'})
-    // }
-
   } catch (error) {
     const m = process.env.NODE_ENV === 'production' ? null : error;
     res.status(404).json({message: `Server Error ===> ${m}`})
+  }
+}
+
+//desc: get: Get List of registered Users;
+//route: /api/user/userlist;
+//access: protected
+
+export const userList = async(req, res)=>{
+  try {
+    const users = await UserModel.find({}).select('-password');
+    if (users){
+      res.json(users)
+    } else{
+      res.status(404).json({message: 'Couldn\'t find list of users'})
+    }
+    
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error;
+    res.status(404).json({message: `Server Error===>${m}`})
+  }
+}
+
+//desc: get: Get a single User;
+//route: /api/user/userlist/:id;
+//access: protected, adminProtected
+
+export const adminEditUser= async(req, res)=>{
+  try {
+    const user = await UserModel.findById(req.params.id).select('-password');
+    if (user){
+      res.json(user)
+    } else{
+      res.status(400).json({message: 'Could not find user'})
+    }
+
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error;
+    res.status(404).json({message: `Server Error===>${m}`})
+  }
+}
+
+//desc: put: put a single User;
+//route: /api/user/userlist/:id;
+//access: protected, adminProtected
+export const makeUserAnAdmin = async(req, res) =>{
+  try {
+    const {admin} = req.body;
+
+    const user = await UserModel.findById(req.params.id).select('-password');
+    if (user){
+      user.isAdmin = admin;
+      const updatedUser = await user.save();
+      if (updatedUser){
+        return res.json('successful')
+      } 
+      return res.status(400).json({message: 'Could not update user'})
+    } else {
+      return res.status(400).json({message: 'Could not find user'})
+    }
+    
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error;
+    res.status(404).json({message: `Server Error===>${m}`})
+  }
+}
+
+//desc: delete: delete a single User;
+//route: /api/user/userlist/:id;
+//access: protected, adminProtected
+export const deleteUser = async(req, res)=>{
+  try {
+    const delUser = await UserModel.findByIdAndDelete(req.params.id);
+    if (delUser){
+      res.json('success');
+    } else{
+      res.status(400).json({message: 'Could not find user'})
+    }
+    
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error;
+    res.status(404).json({message: `Server Error===>${m}`})
   }
 }

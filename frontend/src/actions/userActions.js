@@ -1,5 +1,17 @@
 import axios from 'axios';
 import { 
+  ADMIN_EDIT_USER_FAIL,
+  ADMIN_EDIT_USER_REQUEST,
+  ADMIN_EDIT_USER_SUCCESS,
+  DELETE_USER_FAIL,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  MAKE_ADMIN_FAIL,
+  MAKE_ADMIN_REQUEST,
+  MAKE_ADMIN_SUCCESS,
+  USERLIST_FAIL,
+  USERLIST_REQUEST,
+  USERLIST_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -92,15 +104,20 @@ export const userLoginAction = (login) => async(dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: error.resnponse && error.resnponse.data.message ? 
-        error.resnponse.data.message : error.resnponse
+      payload: error.response && error.response.data.message ? 
+        error.response.data.message : error.response
     })
   }
 }
 
 export const logoutAction = () => async(dispatch) =>{
-  localStorage.clear();
+  // localStorage.clear();
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('userDetails');
+  localStorage.removeItem('shipping');
+  localStorage.removeItem('paymentMethod');
   dispatch({type: USER_LOGOUT})
+  document.location.href = '/';
 }
 
 export const userProfileAction = () => async(dispatch, getState) =>{
@@ -187,6 +204,120 @@ export const userUpdateAction = (input) => async(dispatch, getState) => {
     dispatch({
       type: USER_UPDATE_FAIL,
       payload: error.response && error.response.data.message ?
+        error.response.data.message : error.response
+    })
+  }
+}
+
+export const usersListAction = () => async(dispatch, getState) =>{
+  try {
+    dispatch({type: USERLIST_REQUEST});
+
+    const {userLoginReducer: {userDetails: {token}}} = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    const {data} = await axios.get('/api/user/userslist', config);
+    dispatch({
+      type: USERLIST_SUCCESS,
+      payload: data
+    })
+    
+  } catch (error) {
+    dispatch({
+      type: USERLIST_FAIL,
+      payload: error.response && error.response.data.message? 
+        error.response.data.message : error.response
+    })
+  }
+}
+
+export const adminEditUserAction = (id) => async(dispatch, getState) =>{
+  try {
+    dispatch({type: ADMIN_EDIT_USER_REQUEST});
+
+    const {userLoginReducer: {userDetails: {token}}} = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    const {data} = await axios.get(`/api/user/userslist/${id}`, config);
+
+    dispatch({
+      type: ADMIN_EDIT_USER_SUCCESS,
+      payload: data
+    })
+    
+  } catch (error) {
+    dispatch({
+      type: ADMIN_EDIT_USER_FAIL,
+      payload: error.response && error.response.data.message? 
+        error.response.data.message : error.response
+    })
+  }
+}
+
+export const makeAdminAction = (admin, id) => async(dispatch, getState)=>{
+
+  try {
+    dispatch({type: MAKE_ADMIN_REQUEST})
+
+    const {userLoginReducer: {userDetails: {token}}} = getState();
+    const config = {
+      headers: {
+        Authorization : `Bearer ${token}`,
+        'Content-Type' : 'application/json'
+      }
+    }
+
+    const {data} = await axios.put(
+      `/api/user/userslist/${id}`,
+      {admin}, 
+      config
+    )
+
+    dispatch({
+      type: MAKE_ADMIN_SUCCESS,
+      payload: data
+    })
+    
+  } catch (error) {
+    dispatch({
+      type: MAKE_ADMIN_FAIL,
+      payload: error.response && error.response.data.message? 
+        error.response.data.message : error.response
+    })
+  }
+}
+
+export const deleteUserAction = (id) => async(dispatch, getState) =>{
+  try {
+    dispatch({type: DELETE_USER_REQUEST});
+
+    const {userLoginReducer: {userDetails: {token}}} = getState();
+    const config = {
+      headers: {
+        Authorization : `Bearer ${token}`
+      }
+    }
+
+    const {data} = await axios.delete(`/api/user/userslist/${id}`, config)
+
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: data
+    })
+
+    
+  } catch (error) {
+    dispatch({
+      type: DELETE_USER_FAIL,
+      payload: error.response && error.response.data.message? 
         error.response.data.message : error.response
     })
   }

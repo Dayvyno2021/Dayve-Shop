@@ -1,6 +1,7 @@
 .cartpage {
   grid-column: col-start 1 / col-end 10;
   margin-top: 5rem;
+  min-height: 75vh;
 
   display: grid;
   grid-template-columns: repeat(10, minmax(5vw, 1fr));
@@ -64,7 +65,6 @@
       display: flex;
       align-items: center;
       letter-spacing: 0.2rem;
-      // font-size: var(--font17);
       font-size: 1.6rem;
       padding: 0.5rem 1rem;
       color: $color-primary-dark;
