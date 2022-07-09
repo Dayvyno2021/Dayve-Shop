@@ -8,10 +8,15 @@ import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import orderRoutes from './routes/orderRoutes.js';
 import path from 'path';
+import cors from 'cors';
 dotenv.config();
 
 connectDb();
 const app = express();
+
+app.use(cors())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 if (process.env.NODE_ENV === 'development'){
   app.use(morgan('dev'))
