@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const reviewSchema = mongoose.Schema({
   name : {type: String, required: true},
   rating: {type: Number, required: true, default:0},
-  comment: {type: String, required: true}
+  comment: {type: String, required: true},
+  user: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "User"}
 },
 {
   timestamps: true
@@ -12,7 +13,7 @@ const reviewSchema = mongoose.Schema({
 const productSchema = mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'UserModel'},
   name: {type: String, required: true},
-  image: {type:String, required: true},
+  image: {type:String},
   img: {data: Buffer, contentType: String},
   brand: {type: String, required: true},
   category: {type: String, required: true},

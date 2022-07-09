@@ -29,21 +29,16 @@ const Paystack = () => {
   }
 
   const onSuccess = () =>{
-    // localStorage.removeItem("cartItems")
     localStorage.removeItem("cartItems")
     dispatch({type: EMPTY_CART})
     dispatch(orderPaidAction(paymentResult, order._id))//do something
     navigate(`/order/${params.id}`)
-    // window.location.reload();
+  
   }
   
   const componentProps = {
     email: order && order.user.email,
     amount : parseInt(totalPrice*100),
-    // metadata: {
-    //   name : 'Dayve'
-    //   // phone: phone,
-    // },
     publicKey : "pk_test_b0fc7016edb20e8c5b1addca186a557f84668f83",
     text: "Pay Now",
     onSuccess: onSuccess,

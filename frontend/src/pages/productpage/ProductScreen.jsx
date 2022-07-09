@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import Rating from '../homepage/Rating';
-import { productDetailsAction } from '../../actions/productActions';
+import { addReviewAction, productDetailsAction } from '../../actions/productActions';
 import Spinner from '../../components/spinner/Spinner';
 import Alert from '../../components/alert/Alert';
+import { ADD_REVIEW_RESET } from '../../constants/productConstants';
 const ProductScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,14 +14,25 @@ const ProductScreen = () => {
   const [qty, setQty] = useState(1)
   const params = useParams();
 
+  const [rating, setRating] = useState('');
+  const [comment, setComment] = useState('');
 
   const productDetailsReducer = useSelector(state=>state.productDetailsReducer);
   const {loading, product:pro, error} = productDetailsReducer;
 
+  const addReviewReducer = useSelector(state=>state.addReviewReducer);
+  const {loading: loadingR, status, error: errorR} = addReviewReducer;
 
   useEffect(() => {
-    dispatch(productDetailsAction(params.id))
-  }, [params, dispatch])
+    if (status){
+      window.location.reload();
+    } else{
+      if (!pro || (pro._id !== params.id)){
+        dispatch(productDetailsAction(params.id))
+        dispatch({type: ADD_REVIEW_RESET})
+      }
+    }
+  }, [params, dispatch, status, pro])
   
   let des1 =pro && pro.description && pro.description.slice(0, 40);
   let des2 =pro && pro.description && pro.description.slice(40);
@@ -30,17 +42,22 @@ const ProductScreen = () => {
     navigate(`/cart/${params.id}?qty=${qty}`)
   }
 
+  const submitReview = (event) =>{
+    event.preventDefault();
+    dispatch(addReviewAction({rating, comment}, params.id))
+  }
+
   return (
     <div className="product">
-      {loading && <Spinner/>}
-      {error && <Alert message={error}/>}
+      {(loading || loadingR) && <Spinner/>}
+      {(error || errorR) && <Alert message ={error || errorR} />}
       <Link className="go-back" to={'/'} >
         <svg className="go-back__icon"><use xlinkHref="/img/symbol-defs.svg#icon-back"></use></svg> 
         <span>back</span> 
       </Link>
 
       <div className="product--image">
-        <img src={pro.image} alt="" />
+        <img src={pro.img? `/api/products/get/${pro._id}`: pro.image} alt="" />
       </div>
 
       <div className="product--description">
@@ -108,8 +125,40 @@ const ProductScreen = () => {
         </form>
         )}
       </div>
-      <div className="product--reviews">
+      <form className="product--reviews" onSubmit={submitReview}>
+        <h4 className="product--reviews__heading">Drop Review</h4>
+        <div className="review--control">
+          <label htmlFor="rating" className='bold7'>Rating:</label>
+          <select name="rating" id="rating" value={rating} 
+            onChange={(e)=>setRating(e.target.value)} 
+          >
+            <option>select</option>
+            <option value="1">1-poor</option>
+            <option value="2">2-fair</option>
+            <option value="3">3-good</option>
+            <option value="4">4-very good</option>
+            <option value="5">5-Excellent</option>
+          </select>
+        </div>
+        <div className="review--control">
+          <label htmlFor="comment" className='bold7'>Comment:</label>
+          <textarea name="comment" id="comment" cols="30" rows="10" 
+            value={comment} onChange={(e)=>setComment(e.target.value)}
+          />
+        </div>
+        <button className="btn1 center-btn" type='submit'>Submit</button>
+      </form>
+      <div className="reviews">
         <h4 className="product--reviews__heading">Reviews</h4>
+        <div className="reviews--card">
+          {pro && pro.reviews && pro.reviews.map((review)=>(
+            <div className="reviews--each" key={review._id}>
+              <p className="reviews--name"><i className="bold7">Username:</i> {review.name} </p>
+              <Rating product={review} />
+              <p className="reviews--comment"><i className="bold7">Review: </i> {review.comment} </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

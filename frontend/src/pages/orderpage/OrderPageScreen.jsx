@@ -4,14 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/spinner/Spinner';
 import Alert from '../../components/alert/Alert';
-import { orderDetailsAction, orderPaidAction } from '../../actions/orderActions';
+import { deliveryStatusAction, orderDetailsAction, orderPaidAction } from '../../actions/orderActions';
 // import { useState } from 'react';
 import PayPal from '../../components/paypal/PayPal';
 import {PayPalButtons } from "@paypal/react-paypal-js";
-import { ORDER_PAID_RESET } from '../../constants/orderConstants';
+import { DELIVERY_STATUS_RESET, ORDER_PAID_RESET } from '../../constants/orderConstants';
 // import Paystack from '../../components/paystack/Paystack';
 // import axios from 'axios';
-// import Cookies from 'universal-cookie';
 
 
 const OrderPageScreen = () => {
@@ -20,11 +19,17 @@ const OrderPageScreen = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
+  const userLoginReducer = useSelector(state=>state.userLoginReducer);
+  const {userDetails} = userLoginReducer
+
   const orderDetailsReducer = useSelector(state=>state.orderDetailsReducer);
   const {loading, order, order:{totalPrice}, error, success} = orderDetailsReducer;
 
   const orderPaidreducer = useSelector(state=>state.orderPaidreducer);
   const {success: successPaid} = orderPaidreducer
+
+  const deliveryStatusReducer = useSelector(state=>state.deliveryStatusReducer);
+  const {loading: loadingDelvr, success: successDelvr, error:errorDelvr} = deliveryStatusReducer
 
   const decimal2 = (num)=>{
     return Number(num).toFixed(2)
@@ -35,15 +40,14 @@ const OrderPageScreen = () => {
 
   useEffect(()=>{
 
-    if (!success || successPaid || order._id!==params.id){
+    if (!success || successPaid || order._id!==params.id || successDelvr){
       dispatch({type: ORDER_PAID_RESET})
+      dispatch({type: DELIVERY_STATUS_RESET})
       dispatch(orderDetailsAction(params.id))
     } 
-    // else {
-    //   setPrice(order.totalPrice)
-    // }
+
     // eslint-disable-next-line
-  }, [dispatch, params, success, successPaid])
+  }, [dispatch, params, success, successPaid, successDelvr])
 
   const createOrder = async(data, actions) => {
     const pr = parseInt(totalPrice);
@@ -81,10 +85,14 @@ const OrderPageScreen = () => {
     }
   }
 
+  const handleDelivery = (id) =>{
+    dispatch(deliveryStatusAction(id))
+  }
+
   return (
     <div className='orderpage'>
-      {(loading) && <Spinner />}
-      {(error) && <Alert message={error} />}
+      {(loading || loadingDelvr) && <Spinner />}
+      {(error || errorDelvr) && <Alert message={error} />}
       <div className="orderpage--items">
 
         <div className="order--payment my2">
@@ -219,6 +227,12 @@ const OrderPageScreen = () => {
       
         </div>
         ) : ''   
+          }
+          {
+            userDetails && userDetails.isAdmin && !order.isDelivered && order.isPaid &&
+            <button className="mark--delivery btn1" onClick={()=>handleDelivery(params.id)}>
+              MARK ORDER AS DELIVERED
+            </button>
           }
         </div>
       </div>

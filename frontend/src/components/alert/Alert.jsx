@@ -1,16 +1,18 @@
-import React, {memo} from 'react'
+import React from 'react';
 
-const Alert = ({message, variant}) => {
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+
+function Alert({message}){
+  // const notify = () => toast(message);
+  // const notify = () => toast("Wow so easy!");
   return (
-    <div className='alert-container' style={{color: variant}}>
+    <div>
       {alert(message)}
+      {/* <button onClick={notify}>Notify!</button>
+      <ToastContainer /> */}
+
     </div>
-  )
+  );
 }
-
-Alert.prototype = {
-  variant: 'red',
-  meesage: 'Error Occured'
-}
-
-export default memo(Alert)
+export default Alert

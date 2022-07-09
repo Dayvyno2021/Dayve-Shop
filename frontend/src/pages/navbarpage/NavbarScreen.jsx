@@ -17,11 +17,15 @@ const NavbarScreen = ({handleShowNav}) => {
           <svg className="icon-white"><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>
         </button>
         <ul className="nav--list">
-          <Link to='/userslist' className="rm-deco3" onClick={handleShowNav} >
+          <Link to='/admin/userslist' className="rm-deco3" onClick={handleShowNav} >
             {userDetails && userDetails.isAdmin && <li className="item">Users List</li>}
           </Link>
-          {userDetails && userDetails.isAdmin &&  <li className="item">Product List</li>}
-          {userDetails && userDetails.isAdmin &&  <li className="item">Order List</li>}
+          <Link to={'/admin/productslist'} className="rm-deco3" onClick={handleShowNav}>
+            {userDetails && userDetails.isAdmin &&  <li className="item">Product List</li>}
+          </Link>
+          <Link to={'/admin/orderlist'} className='rm-deco3' onClick={handleShowNav}>
+            {userDetails && userDetails.isAdmin &&  <li className="item">Order List</li>}
+          </Link>
           <li className="item">
             {
             !userDetails? 

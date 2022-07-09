@@ -28,8 +28,26 @@
   width: 28rem;
   @include bs;
   display: grid;
-  // justify-items: center;
+  position: relative;
   padding: 1rem 1rem;
+ 
+  .card--fake{
+    z-index: $z-index1;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    // padding: 1rem;
+
+    .card--fake__strike{
+      text-decoration: line-through;
+      color: red;
+    }
+  
+    .card--fake__text{
+      color: green;
+      font-weight: 700;
+    }
+  }
 
   &--heading {
     text-align: center;

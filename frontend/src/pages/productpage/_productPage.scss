@@ -64,6 +64,22 @@
     &__heading {
       @include heading-1;
     }
+
+    .review--control{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      
+      select, textarea, select:focus, select:active {
+        flex-basis: 70%;
+        border: 1.2px solid $color-primary-dark;
+        outline: 1.2px solid $color-primary-dark;
+        border-radius: 3px;
+      }
+    }
+
+
   }
 
   &--element {
@@ -126,4 +142,24 @@
   display: block;
   margin: 0 auto;
   color: $color-font;
+}
+
+.reviews{
+  grid-column: 1/ -1;
+  width: 100%;
+  margin: 0 3rem;
+  // display: grid;
+  grid-gap: 1rem;
+  
+  &--card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 28rem));
+    grid-gap: 2rem;
+  }
+  
+  &--each{
+    @include bs;
+    padding: 2rem;
+    width: 25rem;
+  }
 }

@@ -14,7 +14,13 @@ import { ORDER_DETAILS_FAIL,
   MY_ORDERS_SUCCESS,
   MY_ORDER_DELETE_FAIL,
   MY_ORDER_DELETE_REQUEST,
-  MY_ORDER_DELETE_SUCCESS
+  MY_ORDER_DELETE_SUCCESS,
+  ADMIN_ORDERLIST_FAIL,
+  ADMIN_ORDERLIST_REQUEST,
+  ADMIN_ORDERLIST_SUCCESS,
+  DELIVERY_STATUS_FAIL,
+  DELIVERY_STATUS_REQUEST,
+  DELIVERY_STATUS_SUCCESS
 } from '../constants/orderConstants';
 
 export const placeOrderAction = (order) => async(dispatch, getState) =>{
@@ -162,6 +168,59 @@ export const myOrderDeleteAction = (id) => async(dispatch, getState) =>{
       type: MY_ORDER_DELETE_FAIL,
       payload: error.response && error.response.data.message?
         error.response.data.message : error.response
+    })
+  }
+}
+
+export const adminOrderlistAction = () =>async(dispatch, getState) =>{
+  try {
+    dispatch({type: ADMIN_ORDERLIST_REQUEST})
+
+    const {userLoginReducer: {userDetails: {token}}} = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const {data} = await axios.get('/api/order/orderlist/getorders', config);
+
+    dispatch ({
+      type: ADMIN_ORDERLIST_SUCCESS,
+      payload: data
+    })
+    
+  } catch (error) {
+    dispatch({
+      type: ADMIN_ORDERLIST_FAIL,
+      payload: error.response && error.response.data.message?
+        error.response.data.message : error.response
+    })
+  }
+}
+
+export const deliveryStatusAction = (id) => async(dispatch, getState) => {
+  try {
+    dispatch({type: DELIVERY_STATUS_REQUEST})
+
+    const {userLoginReducer:{userDetails:{token}}} = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    const {data} = await axios.put(`/api/order/${id}/delivery`, {}, config)
+    dispatch({
+      type: DELIVERY_STATUS_SUCCESS,
+      payload: data
+    })
+    
+  } catch (error) {
+    dispatch({
+      type: DELIVERY_STATUS_FAIL,
+      payload: error.response && error.response.data.message?
+        error.response.data.message: error.response
     })
   }
 }

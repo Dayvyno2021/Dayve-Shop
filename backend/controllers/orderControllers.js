@@ -108,3 +108,33 @@ export const myOrderDelete = async(req, res) =>{
     res.status(400).json({message: `Server Error===> ${m}`})
   }
 }
+
+export const allOrders = async(req, res) =>{
+  try {
+    const orders = await OrderModel.find({}).populate('user', 'name');
+  if (orders) return res.json(orders);
+  return res.status(400).json({message: "Could not find orders"});
+  
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error;
+    res.status(404).json({message: `Server Error===> ${m}`})
+  }
+}
+
+export const markOrderAsPaid = async(req, res)=>{
+  try {
+
+    const order = await OrderModel.findById(req.params.id);
+    if (order){
+      order.isDelivered = true;
+      order.deliveredAt = new Date().toISOString();
+      await order.save();
+      return res.json('success')
+    }
+    return res.status(400).json({message: 'Could not find order'})
+    
+  } catch (error) {
+    const m = process.env.NODE_ENV === 'production'? null : error;
+    res.status(404).json({message: `Server Error===> ${m}`})
+  }
+}

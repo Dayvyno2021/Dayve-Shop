@@ -1,13 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { cartReducer } from './reducers/cartReducers';
+
 import { 
+  adminOrderlistReducer,
+  deliveryStatusReducer,
   myOrderDeleteReducer, 
   myOrdersReducers, 
   orderDetailsReducer, 
   orderPaidreducer, 
   placeOrderReducer 
 } from './reducers/orderReducers';
-import { productDetailsReducer, productListReducer } from './reducers/productReducers';
+
+import { 
+  addReviewReducer,
+  adminDelProductReducer, 
+  createProductReducer, editProductReducer, 
+  highRatedReducer, 
+  productDetailsReducer, productListReducer 
+} from './reducers/productReducers';
+
 import { 
   adminEditUserReducer, 
   deleteUserReducer, 
@@ -37,7 +48,14 @@ const store = configureStore ({
     usersListReducer: usersListReducer,
     adminEditUserReducer: adminEditUserReducer,
     makeAdminReducer: makeAdminReducer,
-    deleteUserReducer: deleteUserReducer
+    deleteUserReducer: deleteUserReducer,
+    createProductReducer: createProductReducer,
+    editProductReducer: editProductReducer,
+    adminDelProductReducer: adminDelProductReducer,
+    adminOrderlistReducer: adminOrderlistReducer,
+    deliveryStatusReducer: deliveryStatusReducer,
+    addReviewReducer: addReviewReducer,
+    highRatedReducer: highRatedReducer
   },
 })
 

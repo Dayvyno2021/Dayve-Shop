@@ -1,5 +1,5 @@
 import { memo, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { logoutAction } from '../../actions/userActions';
 import ProfileScreen from '../../pages/profilepage/ProfileScreen';
@@ -10,6 +10,11 @@ const Header = () => {
 
   const userProfileReducer = useSelector((state)=>state.userProfileReducer)
   const {userDetails} = userProfileReducer;
+
+  const cartReducer = useSelector(state=>state.cartReducer)
+  const {cartItems} = cartReducer;
+
+  let f = cartItems && cartItems.map((value)=>value.qty).reduce((t,v)=>t+v, 0);
 
   const [show, setShow] = useState(false)
   const [showNav, setShowNav] = useState(false)
@@ -22,6 +27,29 @@ const Header = () => {
     setShowNav(!showNav)
   }
 
+  const handleShowNavUp = () =>{
+    handleShowNav();
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }
+  // eslint-disable-next-line 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchInput, setSearchInput] = useState('');
+
+  const search = (event) => {
+    event.preventDefault();
+    let filter = searchInput || '';
+    if (filter) {
+      setSearchParams({filter})
+    } else {
+      setSearchParams({})
+    }
+    return filter
+  }
+
   return (
     <>
     <header className='header'>
@@ -30,10 +58,34 @@ const Header = () => {
           <img src="/brand.ico" alt="" className='brand' />
           <svg className="header--icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-home"></use></svg>
         </Link>
-        <div className="icon--container header--cart">
+        <form className="search">
+          <div className="search--group">
+            <input type="search" className="header--group__input" id='search' 
+              placeholder='search...' value={searchInput}
+              onChange={(e)=>setSearchInput(e.target.value)}
+            />
+            {/* <input type="search" className="header--group__input" id='search' 
+              placeholder='search...' value={searchParams.get('filter') || ''}
+              onChange={
+                (e)=>{
+                  let filter = e.target.value;
+                  if (filter){
+                    setSearchParams({filter})
+                  }else {
+                    setSearchParams({})
+                  }
+                }
+              }
+            /> */}
+          </div>
+          <button className="search--button" onClick={search}>
+            <svg className="header--icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-magnifying-glass"></use></svg>
+          </button>
+        </form>
+        <div className="header--cart">
           <Link to={'/cart/id'} className='rm-deco link'>
             <svg className="header--icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-cart"></use></svg>
-            <span className='styled-font'>Cart</span>
+            {f===0? <div></div> : <div className='cart--qty'>{f}</div>}
           </Link>
         </div>
 
@@ -83,7 +135,7 @@ const Header = () => {
             <svg className="header--icon"><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>
         </div> */}
         <div className="header--open header--control">
-          <div onClick={handleShowNav} > 
+          <div onClick={handleShowNavUp} > 
             <svg className="header--icon link"><use xlinkHref="/img/symbol-defs.svg#icon-menu1"></use></svg>
           </div>
         </div>

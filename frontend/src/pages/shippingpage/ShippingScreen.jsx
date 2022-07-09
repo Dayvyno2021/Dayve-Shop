@@ -56,14 +56,14 @@ const ShippingScreen = () => {
           />
         </div>
         <div className="form--control">
-          <label htmlFor="postal" className=" bold7"><i className="">Poatal Code:</i></label>
+          <label htmlFor="postal" className=" bold7"><i className="">Postal Code:</i></label>
           <input type="number" name='postalCode' id='postal' 
             className=" input" placeholder='Postal Code' autoComplete='true'
             onChange={inputHandler} value = {input.postalCode || ''}
           />
         </div>
         <div className="form--control">
-          <label htmlFor="country" className=" bold7"><i className="">City:</i></label>
+          <label htmlFor="country" className=" bold7"><i className="">Country:</i></label>
           <input type="text" name='country' id='country' 
             className=" input" placeholder='Country' autoComplete='true'
             onChange={inputHandler} value = {input.country || ''}
