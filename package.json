@@ -4,6 +4,9 @@
   "type": "module",
   "description": "An e-commerce website to market and sell all kinds of household items",
   "main": "server.js",
+  "engines": {
+    "node": "14.17.6"
+  },
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
@@ -12,6 +15,10 @@
     "data:import": "node backend/seeder.js",
     "data:destroy": "node backend/seeder.js -d"
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "Dayvyno2021",
   "license": "ISC",
   "dependencies": {
