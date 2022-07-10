@@ -30,13 +30,13 @@
     }
     
     @media only screen and (max-width: $bp-600){
-      grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
-      // grid-template-columns: 1fr 1fr;
+      // grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
+      grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 2rem;
     }
     @media only screen and (max-width: $bp-490){
-      grid-template-columns: repeat(auto-fit, minmax(min-content, 18rem));
-      // grid-template-columns: 1fr 1fr;
+      // grid-template-columns: repeat(auto-fit, minmax(min-content, 18rem));
+      grid-template-columns: 1fr 1fr;
       grid-gap: 2rem;
     }
 
