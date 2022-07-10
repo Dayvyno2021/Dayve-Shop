@@ -23,7 +23,7 @@ html {
     font-size: 50%;
   }
 
-  @media only screen and (max-width){
+  @media only screen and (max-width: $bp-600){
     font-size: 40%;
   }
 }
@@ -39,7 +39,7 @@ html {
   grid-template-columns:[full-start] minmax(3vw, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 8vw) [col-end]) [center-end] minmax(3vw, 1fr) [full-end];
   
   // @media only screen and (max-width: $bp-800){
-  //   grid-template-columns:[full-start] minmax(5rem, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 8vw) [col-end]) [center-end] minmax(5rem, 1fr) [full-end];
+  //   grid-template-columns:[full-start] minmax(2rem, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 8vw) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
   // }
  
 }

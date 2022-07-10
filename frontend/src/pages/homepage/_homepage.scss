@@ -4,6 +4,11 @@
   // padding: 0 3rem;
   margin-top: 4rem;
 
+  @media only screen and (max-width: $bp-600){
+    grid-column: 1 / -1;
+    padding: 0 2rem;
+  }
+
   &--products{
     display: grid;
     grid-gap: 3rem;
@@ -13,17 +18,26 @@
     align-content: center;
     justify-items: center;
 
+    @media only screen and (max-width: $bp-1000){
+      grid-template-columns: repeat(auto-fit, minmax(min-content, 25rem));
+    }
+
     @media only screen and (max-width: $bp-800){
       margin-top: 0.3rem;
-      grid-template-columns: repeat(auto-fit, minmax(min-content, 20rem));
+      grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
       padding: 0 1.5rem;
-      grid-gap: 2rem;
+      grid-gap: 3rem;
     }
     
     @media only screen and (max-width: $bp-600){
-      grid-template-columns: repeat(auto-fit, minmax(min-content, 16rem));
-      grid-gap: 1rem;
-
+      grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
+      // grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+    }
+    @media only screen and (max-width: $bp-490){
+      grid-template-columns: repeat(auto-fit, minmax(min-content, 18rem));
+      // grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
     }
 
   }
@@ -44,14 +58,14 @@
 }
 
 .card {
-  width: 28rem;
+  min-width: 28rem;
   @include bs;
   display: grid;
   position: relative;
   padding: 1rem 1rem;
 
   @media only screen and (max-width:$bp-600){
-    width: 16rem;
+    min-width: 18rem;
   }
  
   .card--fake{

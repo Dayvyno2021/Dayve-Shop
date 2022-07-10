@@ -24,7 +24,7 @@ p{
   padding: 1rem;
   border-radius: 3px;
   font-size: var(--font16);
-  width: 3rem;
+  width: 5rem;
   height: 2rem;
   
   &:focus-visible, &:focus, &:active, &:focus-within, &:hover {
@@ -193,6 +193,9 @@ p{
 
 .mr1 {
   margin-right: 1rem;
+}
+.m1 {
+  margin: 1rem;
 }
 
 .paystack-logo{

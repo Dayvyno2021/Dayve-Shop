@@ -6,10 +6,16 @@
   grid-gap: 2rem;
   font-size: var(--font14);
   margin-top: 4rem;
+  @media only screen and (max-width:$bp-600 ){
+    grid-row-gap: 0.5rem;
+  }
 
   &--image {
     grid-column: 4 / 8;
     padding: 2rem;
+    @media only screen and (max-width:$bp-600 ){
+      padding-bottom: 0;
+    }
 
     & > img {
       width: 100%;
@@ -27,6 +33,16 @@
     margin: 1rem;
     margin-left: 4rem;
 
+    @media only screen and (max-width:$bp-800 ){
+      padding: 1rem;
+      margin: 0;
+      margin-left: 2rem;
+    }
+    @media only screen and (max-width:$bp-600 ){
+      grid-column: 1/-1;
+      padding: 1rem 2rem;
+    }
+
     &__name {
       @include heading-1
     }
@@ -39,6 +55,16 @@
     @include bs-light;
     padding: 2rem 2rem;
     margin: 1rem;
+
+    @media only screen and (max-width:$bp-800 ){
+      padding: 1rem;
+      margin: 0%;
+    }
+
+    @media only screen and (max-width:$bp-600 ){
+      grid-column: 1/-1;
+      padding: 1rem 2rem;
+    }
 
     &__heading {
       @include heading-1;
@@ -60,6 +86,16 @@
     margin: 1rem;
     margin-right: 4rem;
 
+    @media only screen and (max-width:$bp-800 ){
+      padding: 1rem;
+      margin: 0;
+      margin-right: 2rem;
+    }
+
+    @media only screen and (max-width:$bp-600 ){
+      grid-column: 1/-1;
+      padding: 1rem 2rem;
+    }
 
     &__heading {
       @include heading-1;

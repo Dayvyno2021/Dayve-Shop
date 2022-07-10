@@ -109,14 +109,14 @@ const RegisterScreen = () => {
       {error && <Alert message={error} />}
       <form onSubmit={handleSubmit} className='register'>
         <div className="register--heading"><i className="">Register</i></div>
-        <div className="login--control name">
+        <div className="register--control name">
           <label htmlFor="name" className="name--label bold7"><i className="">full name:</i></label>
           <input type="text" name='name' id='name' 
             autoComplete='true' className="name--input input" placeholder='full name'
             onChange={handleInput} value = {input.name || ''} required
           />
         </div>
-        <div className="login--control email">
+        <div className="register--control email">
           <label htmlFor="email" className="name--label bold7"><i className="">Email:</i></label>
           <input type="email" name='email' id='email' 
             autoComplete='true' className="email--input input" placeholder='Email'
@@ -134,7 +134,7 @@ const RegisterScreen = () => {
           </div>
         </div>
 
-        <div className="login--control password">
+        <div className="register--control password">
           <label htmlFor="password" className="name--label bold7"><i className="">Password:</i></label>
           <input type="password" name='password' autoComplete='true' 
             id='password' className="password--input input" placeholder='Enter password' 
@@ -145,7 +145,7 @@ const RegisterScreen = () => {
             onFocus={handleFocus} onBlur={handleBlur} onKeyUp={handleValidation}
           />
         </div>
-        <div className="login--control c-password">
+        <div className="register--control c-password">
           <label htmlFor="cPassword" className="name--label bold7"><i className="">Confirm Password:</i></label>
           <input type="password" name='cPassword' autoComplete='true' 
             id='cPassword' className="cPassword--input input" placeholder='Confirm password' 

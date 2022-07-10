@@ -8,9 +8,12 @@
 
   display: grid;
   grid-template-columns: repeat(10, minmax(5vw, 1fr));
-  // grid-template-rows: repeat(5, 1fr);
-  // grid-template-rows: min-content 14vw 10vw min-content ;
   grid-gap: 3rem;
+
+  @media only screen and (max-width: $bp-800){
+    grid-gap: 1.5rem;
+    margin: 2rem 2rem;
+  }
 
 
   .checkout--list{
@@ -21,6 +24,10 @@
     grid-column: 1 / 7;
     height: min-content;
 
+    @media only screen and (max-width: $bp-490){
+      grid-column: 1 / -1;
+    }
+  
   }
   
   &--list {
@@ -48,6 +55,11 @@
   &--summary{
     grid-column: 7 / -1;
     padding: 1rem 1.5rem;
+
+    @media only screen and (max-width: $bp-490){
+      grid-column: 1 / -1;
+    }
+  
     
     &__content{
       @include bs-light;

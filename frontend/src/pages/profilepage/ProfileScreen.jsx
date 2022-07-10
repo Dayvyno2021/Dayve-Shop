@@ -130,7 +130,7 @@ const ProfileScreen = ({handleShow}) => {
             <p className="bold7">Updated:</p>
             <p className="">{user && user.updatedAt && datedUpdated(user)}</p>
           </div>
-          <input type="submit" value={'Update'} className="update__submit btn1" 
+          <input type="submit" value={'Update'} className="center-btn btn1" 
             onClick={submitUpdate}
           />
         </form>

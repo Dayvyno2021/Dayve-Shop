@@ -1,14 +1,24 @@
 .login--container {
   grid-column: col-start 3/ span 6;
   margin-top: 6rem;
+  min-height: 75vh;
   font-size: var(--font16);
   padding: 2rem 4rem;
   padding-bottom: 3rem;
   @include bs-light;
+
+  @media only screen and (max-width: $bp-800){
+    padding: 1rem 1.5rem;
+  }
+
+  @media only screen and (max-width: $bp-600){
+    padding: 1rem 4rem;
+    grid-column: 1 / -1;
+  }
 }
 
 .login {
-  padding: 2rem;
+  // padding: 2rem;
   padding-bottom: 4rem;
 
   &--control {

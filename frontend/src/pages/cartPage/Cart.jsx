@@ -34,7 +34,7 @@ const Cart = ({cartItem, deleteFromCart}) => {
            >
             {
               [...Array(cartItem.countInStock).keys()].map((x)=>(
-                <option value={x+1} key={x+1} >{x+1}</option>
+                <option value={x+1} key={x+1} className='cart--option' >{x+1}</option>
               ))
             }
           </select>

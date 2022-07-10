@@ -3,8 +3,26 @@
   align-items: center;
 }
 
-.carousel--left, .carousel--right{
-  color: yellowgreen;
+.carousel--left{
+  color: $color-primary-dark;
+  transform: rotate(0);
+  animation: carousel 2s infinite;
+
+  @media only screen and (max-width: $bp-800){
+    font-size: 1.3rem;
+  }
+  @media only screen and (max-width: $bp-600){
+    margin-left: 8rem;
+    transform: rotate(45deg);
+  }
+  @media only screen and (max-width: $bp-490){
+    margin-left: 4rem;
+    transform: rotate(45deg);
+  }
+}
+
+.carousel--right{
+  color: $color-primary-dark;
   transform: rotate(0);
   animation: carousel 2s infinite;
 
@@ -13,6 +31,11 @@
   }
   @media only screen and (max-width: $bp-600){
     transform: rotate(45deg);
+    margin-right: 8rem;
+  }
+  @media only screen and (max-width: $bp-490){
+    transform: rotate(45deg);
+    margin-right: 4rem;
   }
 }
 

@@ -1,24 +1,22 @@
 .profile--container {
-  grid-column: full-start / -1;
-  margin-top: 7rem;
-  display: flex;
-  justify-content: center;
+  grid-column: 1 / -1;
+  margin-top: 2rem;
   color: $color-font;
   border-radius: 5px;
   font-size: var(--font16);
 }
 
 .profile {
-  width: 80%;
   height: min-content;
-  position: relative;
-  top: -5rem;
-  @include bg-primary;
+  background-color: $color-grey-light2;
   padding: 2rem 4rem;
   @include bs-light;
   border-radius: 5px;
-  display: grid;
-  grid-template-columns: 35% 65%;
+
+  // @media only screen and (max-width: $bp-800){
+  //   width: 90%;
+  //   padding: 1rem 2rem;
+  // }
 
 }
 
@@ -30,16 +28,19 @@
   grid-column: 1/-1;
   border: 3px solid $color-grey-light;
   padding: 0.3rem;
+  display: block;
+  margin: 0 auto;
 }
 
 .profile2{
   background-color: $color-grey-light;
   padding: 2rem 1rem;
   border-radius: 5px;
-  margin-bottom: 10rem;
-  grid-column: 1 / 2;
-  margin-right: 2rem;
   height: min-content;
+  width: 50vw;
+  display: block;
+  margin: 2rem auto;
+  margin-top: 1rem;
   @include bs-light;
 
   & > *{
@@ -56,6 +57,7 @@
     outline: none;
     border: none;
     padding: 0.5rem 1rem;
+    width: 70%;
   }
 }
 

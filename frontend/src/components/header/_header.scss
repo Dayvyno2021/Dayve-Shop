@@ -9,7 +9,7 @@
   left: 0;
   right: 0%;
 
-  .header--logout {
+  .header--logout, .header--login, .header--register {
 
     @media only screen and  (max-width: $bp-800){
       display: none;

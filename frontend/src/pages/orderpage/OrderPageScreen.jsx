@@ -179,7 +179,7 @@ const OrderPageScreen = () => {
         </div>
       </div>
 
-      <div className="placeorder--summary">
+      <div className="orderpage--summary">
         <h2 className=''><i className="placeorder--items__header">Order Summary</i></h2>
         <div className="placeorder--summary__content">
           <div className="item">

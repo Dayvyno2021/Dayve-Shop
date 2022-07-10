@@ -75,7 +75,7 @@ const Header = () => {
           {
             !userDetails? 
             (
-            <div className="icon--container header--links">
+            <div className="icon--container header--links header--login">
               <Link to={'/login'} className='link'>
                 <svg className="header--icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-user"></use></svg>
                 <span className='styled-font'>Login</span>
@@ -95,7 +95,7 @@ const Header = () => {
 
           {!userDetails && 
           (
-          <div className="icon--container">
+          <div className="icon--container header--register">
             <Link to={'/register'} className='link'>
               <svg className="header--icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-user-plus"></use></svg>
               <span className='styled-font'>Register</span>

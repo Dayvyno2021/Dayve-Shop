@@ -6,6 +6,13 @@
   padding-bottom: 3rem;
   @include bs-light;
 
+  @media only screen and (max-width: $bp-600){
+    grid-column: 1/-1;
+    padding-left: 10rem;
+    padding-right: 10rem;
+
+  }
+
   &--heading{
     display: flex;
     justify-content: center;

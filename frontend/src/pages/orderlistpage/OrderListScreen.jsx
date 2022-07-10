@@ -47,9 +47,8 @@ const OrderListScreen = () => {
               <th className="">S/N</th>
               <th className="">ORDER ID</th>
               <th className="">ORDERED BY (name)</th>
-              <th className="">ORDERED BY (id)</th>
               <th className=""> ORDER DATE</th>
-              <th className="">TOTAL (&#8358;)</th>
+              <th className="">AMOUNT (&#8358;)</th>
               <th className="">PAID?</th>
               <th className="">DELIVERED</th>
               <th className="">DETAILS</th>
@@ -62,7 +61,6 @@ const OrderListScreen = () => {
                 <td>{index+1}</td>
                 <td>{order._id}</td>
                 <td>{order && order.user && order.user.name}</td>
-                <td>{order && order.user && order.user._id}</td>
                 <td>{order && datedCreated(order)}</td>
                 <td>{order && order.totalPrice && order.totalPrice.toLocaleString()}</td>
                 <td >

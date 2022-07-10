@@ -64,27 +64,28 @@ const ProductScreen = () => {
         <h4 className="product--description__name">{pro.name} </h4>
         <div className="product--element">
           <h4 className="title">Brand: </h4>
-          <p className="content">{pro.brand} </p>
+          <p className="content mr1">{pro.brand} </p>
         </div>
         <div className="product--element">
           <h4 className="title">Category: </h4>
-          <p className="content">{pro.category} </p>
+          <p className="content mr1">{pro.category} </p>
         </div>
         <div className="product--element">
           <h4 className="title">Price: </h4>
-          <p className='price' style={{fontWeight:'bold'}}>&#8358; {(Number(pro.price)).toLocaleString()}</p>
+          <p className='price mr1' style={{fontWeight:'bold'}}>&#8358; {(Number(pro.price)).toLocaleString()}</p>
         </div>
         <div className="product--element">
           <h4 className="title">Qty in Stock: </h4>
-          <p className="content">{pro && pro.countInStock} </p>
+          <p className="content mr1">{pro && pro.countInStock} </p>
         </div>
         <div className="product--element">
           <h4 className="title">Category: </h4>
-          <Rating product={pro} />
+          <div className="mr1"><Rating product={pro} /> </div>
+          
         </div>
         <div className="product--element">
           <h4 className="title">Number of Reviews: </h4>
-          <p className="content">{pro.numReviews} </p>
+          <p className="content mr1">{pro.numReviews} </p>
         </div>
         <div className="product--element">
           <h4 className="title">Description: </h4>

@@ -9,13 +9,22 @@
 
   display: grid;
   grid-template-columns: repeat(10, minmax(5vw, 1fr));
-  // grid-template-rows: repeat(5, 1fr);
-  // grid-template-rows: 14vw 10vw min-content ;
   grid-gap: 3rem;
+
+  @media only screen and (max-width: $bp-800){
+    grid-gap: 1.5rem;
+    padding: 1rem 2rem;
+    margin: 3rem 2rem;
+  }
+
 
   &--items{
     grid-column: 1 / 7;
     height: min-content;
+
+    @media only screen and (max-width: $bp-600){
+      grid-column: 1/-1;
+    }
 
     .cart--items{
       display: flex;
@@ -37,6 +46,10 @@
   &--summary{
     grid-column: 7 / -1;
     padding: 1rem 1.5rem;
+    
+    @media only screen and (max-width: $bp-600){
+      grid-column: 1/-1;
+    }
     
     &__content{
       @include bs-light;
