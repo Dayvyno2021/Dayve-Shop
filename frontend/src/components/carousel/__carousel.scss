@@ -3,13 +3,17 @@
   align-items: center;
 }
 
-.carousel--right{
+.carousel--left, .carousel--right{
   color: yellowgreen;
+  transform: rotate(0);
   animation: carousel 2s infinite;
-}
-.carousel--left{
-  color: yellowgreen;
-  animation: carousel 2s infinite;
+
+  @media only screen and (max-width: $bp-800){
+    font-size: 1.3rem;
+  }
+  @media only screen and (max-width: $bp-600){
+    transform: rotate(45deg);
+  }
 }
 
 .slideshow--container {
@@ -19,6 +23,10 @@
   padding: 0.5rem;
   border-radius: 3px;
   @include bs;
+
+  @media only screen and (max-width: $bp-600){
+    width: 30vw;
+  }
 
 
   .carousel--image {

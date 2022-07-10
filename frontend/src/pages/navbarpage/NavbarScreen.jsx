@@ -26,6 +26,9 @@ const NavbarScreen = ({handleShowNav}) => {
           <Link to={'/admin/orderlist'} className='rm-deco3' onClick={handleShowNav}>
             {userDetails && userDetails.isAdmin &&  <li className="item">Order List</li>}
           </Link>
+          <Link to={`/user-profile/${userDetails && userDetails.id}`} className='rm-deco3' onClick={handleShowNav}>
+            <li className="item">{userDetails && userDetails.name}{'\'s '} Profile</li>
+          </Link>
           <li className="item">
             {
             !userDetails? 

@@ -26,10 +26,7 @@ const CartPageScreen = () => {
 
   let f = cartItems && cartItems.map((value)=>value.qty).reduce((t,v)=>t+v, 0);
   const checkout = cartItems && cartItems.map((value)=>value.price*value.qty).reduce((t,v)=>t+v, 0);
-  // const discount = 0.03*p;
-  // const bonus = 0.02*p;
-  // const checkout = p-discount-bonus;
-
+ 
   const deleteFromCart = useCallback((id) => {
     dispatch(removeFromCartAction(id))
     navigate('/cart/id')
@@ -65,14 +62,7 @@ const CartPageScreen = () => {
           <p className="price-label bold7">PRICE:</p>
           <p className="price1">&#8358; {checkout && checkout.toLocaleString()} </p>
         </div>
-        {/* <div className="cartpage--summary__total">
-          <p className="bold7">Discount (3%):</p>
-          <p className="font16">&#8358; {discount && discount.toLocaleString()} </p>
-        </div> */}
-        {/* <div className="cartpage--summary__total">
-          <p className="bold7">Bonus (2%):</p>
-          <p className="font16">&#8358; {bonus && bonus.toLocaleString()} </p>
-        </div> */}
+
         <Link to={'/login?redirect=shipping'} className='rm-deco'>
           <button className="checkout price1">Checkout (&#8358; {checkout && checkout.toLocaleString()})</button>
         </Link>

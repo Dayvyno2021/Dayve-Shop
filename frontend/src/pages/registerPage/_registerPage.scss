@@ -17,8 +17,55 @@
     margin: 2rem;
 
     &>*:not(:last-child){
-      margin-right: 2rem;
+      margin-right: 1rem;
     }
+  }
+  #message{
+    position: relative;
+    bottom: -1rem;
+    left: 0;
+    margin-bottom: 0;
+    // display: block;
+    padding: 0rem 0.2rem;
+    font-size: 1.1rem;
+    margin: 0 2rem;
+    padding: 0.2rem;
+
+    display:none;
+    background: #f1f1f1;
+    // color: #000;
+
+    .validations{
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Add a green text color and a checkmark when the requirements are right */
+    .valid {
+      color: green;
+    }
+
+    .valid:before {
+      position: relative;
+      left: -2px;
+      content: "✔";
+      // border: 1px solid currentColor;
+      padding: 0.2rem;
+    }   
+    
+    /* Add a red text color and an "x" when the requirements are wrong */
+    .invalid {
+      color: red;
+    }
+    
+    .invalid:before {
+      position: relative;
+      left: -2px;
+      content: "✖";
+      // border: 1px solid currentColor;
+      padding: 0.2rem;
+    }
+    
   }
 
   &--heading{
@@ -58,3 +105,4 @@
     margin: 0 auto;
   }
 }
+

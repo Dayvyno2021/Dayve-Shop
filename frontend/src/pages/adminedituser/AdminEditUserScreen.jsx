@@ -25,7 +25,7 @@ const AdminEditUserScreen = () => {
     if (successMake){
       dispatch({type: MAKE_ADMIN_RESET});
       dispatch({type: ADMIN_EDIT_USER_RESET})
-      navigate(`/userslist`)
+      navigate(`/admin/userslist`)
     } else {
       if (!user || params.id !== user._id){
         dispatch(adminEditUserAction(params.id))

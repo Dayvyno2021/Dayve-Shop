@@ -4,10 +4,17 @@
   align-self: center;
   @include bg-primary;
   position: fixed;
-  z-index: $z-index1;
+  z-index: $z-index2;
   top: 0;
   left: 0;
   right: 0%;
+
+  .header--logout {
+
+    @media only screen and  (max-width: $bp-800){
+      display: none;
+    }
+  }
 
   .header--cart{
     position: relative;
@@ -35,10 +42,11 @@
   &--container {
     display: flex;
     margin: 1rem 4rem;
-    align-items: center;
-    
-    & > *:not(:last-child) {
-      margin-right: 2rem;
+    justify-content: space-between;
+    align-items: center; 
+
+    @media only screen and (max-width: $bp-600){
+      margin : 1rem 2rem;
     }
   }
 
@@ -55,18 +63,17 @@
   }
 
   .search{
-    margin-right: auto;
     display: flex;
-    margin-left: 2rem;
   }
 
   .search--group{
-    margin-right: 1rem;
+    margin-right: 0.2rem;
 
     input{
       border: none;
-      padding: 0.3rem 1rem;
+      padding: 0.5rem 1rem;
       border-radius: 2rem;
+      width: 40vw;
 
     }
     input:active, input:focus{
@@ -77,8 +84,20 @@
 
   .search--button{
     border: 1px solid $color-grey;;
-    border-radius: 3px;
+    border-radius: 0.3rem 2rem 2rem 0.3rem;
     cursor: pointer;
+  }
+
+  .header--end {
+    display: flex;
+
+    &>*:not(:last-child) {
+      margin-right: 2rem;
+
+      @media only screen and (max-width: $bp-600){
+        margin-right: 1rem;
+      }
+    }
   }
 }
 

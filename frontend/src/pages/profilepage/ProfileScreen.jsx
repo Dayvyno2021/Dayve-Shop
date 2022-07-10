@@ -5,15 +5,16 @@ import Spinner from '../../components/spinner/Spinner'
 import { Link } from 'react-router-dom';
 import Alert from '../../components/alert/Alert'
 import { myOrderDeleteAction, myOrdersAction } from '../../actions/orderActions';
-import { MY_ORDER_DELETE_RESET } from '../../constants/orderConstants';
+// import { MY_ORDER_DELETE_RESET } from '../../constants/orderConstants';
 // import ProfileOrders from './ProfileOrders';
 
 const ProfileScreen = ({handleShow}) => {
   const dispatch = useDispatch();
   const userProfileReducer = useSelector(state=>state.userProfileReducer);
   const {userDetails:user, loading, error} = userProfileReducer;
+
   const userUpdateReducer = useSelector((state)=>state.userUpdateReducer);
-  const {loading: uLoading, error:uError} = userUpdateReducer;
+  const {loading: uLoading, error:uError, success: successUpdate} = userUpdateReducer;
 
   const myOrdersReducers = useSelector((state)=>state.myOrdersReducers);
   const {orders, loading: loadingOrder} = myOrdersReducers;
@@ -21,36 +22,33 @@ const ProfileScreen = ({handleShow}) => {
   const myOrderDeleteReducer = useSelector((state)=>state.myOrderDeleteReducer);
   const {successDel} = myOrderDeleteReducer
 
-  useEffect(()=>{
-    // if (!user) {
-    //   dispatch(userProfileAction())
-    // }
-    // if (!success){
-    //   dispatch(myOrdersAction())
-    // }
-    if (!orders || successDel){
-      dispatch({type:MY_ORDER_DELETE_RESET})
-      dispatch(myOrdersAction())
-    }
-  }, [dispatch, orders, successDel])
-
-  const [uInput, setUinput] = useState(
-    {
-      name: user && user.name,
-    }
-  )
-
-  const handleUpdate = (e) =>{
-    let name = e.target.name;
-    let value = e.target.value;
-    setUinput(values=>({...values, [name]: value}))
+  const [alert, setAlert] = useState(false)
+  const handleClick = () =>{
+    setAlert(false)
   }
+
+  useEffect(()=>{
+    if (user && user.name){
+      dispatch(myOrdersAction())
+      setName(user.name)
+      setPassword('')
+    } 
+
+  
+  }, [dispatch, user, successDel, successUpdate])
+
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('')
+  const [cPassword, setCPassword] = useState('')
 
   const submitUpdate = (event) => {
     event.preventDefault();
-    const {name, password} = uInput
     const id = user && user.id
-    dispatch(userUpdateAction({name, password, id}))
+    if (password !== cPassword){
+      setAlert(true);
+    }else{
+      dispatch(userUpdateAction({name, password, id}))
+    }
   }
 
   const datedCreated = (date) => {
@@ -73,19 +71,17 @@ const ProfileScreen = ({handleShow}) => {
 
   return (
     <div className='profile--container'>
+      {alert && <Alert message='Password does not match' handleClick={handleClick} />}
       {(loading || uLoading || loadingOrder) && <Spinner />}
       {(error || uError) && <Alert message={error} />}
       <div className="profile">
-        <button onClick={handleShow} className='profile--close'>
-          <svg className="icon-grey"><use xlinkHref="/img/symbol-defs.svg#icon-cross"></use></svg>
-        </button>
         <img src={`https://i.pravatar.cc/100`} alt="" className="profile--image" />
         <form className="profile2">
           <div className="profile2--name">
             <p className="bold7">Name:</p>
             <input type="text" className="profile--input" 
               placeholder={'update name '} name='name' id='name'
-              value = {uInput.name || '' } onChange={handleUpdate} autoComplete='true'
+              value = {name} onChange={(e)=>setName(e.target.value)} autoComplete='true'
             />
             <label htmlFor="name">
               <svg className="icon2"><use xlinkHref="/img/symbol-defs.svg#icon-pencil"></use></svg>
@@ -99,7 +95,7 @@ const ProfileScreen = ({handleShow}) => {
             <p className="bold7">Password:</p>
             <input type="password" className="profile--input" 
               placeholder={'  update password'} name='password' id='pwd'
-              value = {uInput.password || ''} onChange={handleUpdate} autoComplete='true'
+              value = {password} onChange={(e)=>setPassword(e.target.value)} autoComplete='true'
             />
             <label htmlFor="pwd">
               <svg className="icon2"><use xlinkHref="/img/symbol-defs.svg#icon-pencil"></use></svg>
@@ -109,7 +105,7 @@ const ProfileScreen = ({handleShow}) => {
             <p className="bold7">Confirm Password:</p>
             <input type="password" className="profile--input" 
               placeholder='confirm password' name='cPassword' id='pwdc'
-              value = {uInput.cPassword || ''} onChange={handleUpdate} autoComplete='true'
+              value = {cPassword} onChange={(e)=>setCPassword(e.target.value)} autoComplete='true'
             />
             <label htmlFor="pwdc">
               <svg className="icon2"><use xlinkHref="/img/symbol-defs.svg#icon-pencil"></use></svg>
@@ -128,11 +124,11 @@ const ProfileScreen = ({handleShow}) => {
           </div>
           <div className="profile2--name">
             <p className="bold7">Created:</p>
-            <p className="">{user && datedCreated(user)}</p>
+            <p className="">{user && user.createdAt && datedCreated(user)}</p>
           </div>
           <div className="profile2--name">
             <p className="bold7">Updated:</p>
-            <p className="">{user && datedUpdated(user)}</p>
+            <p className="">{user && user.updatedAt && datedUpdated(user)}</p>
           </div>
           <input type="submit" value={'Update'} className="update__submit btn1" 
             onClick={submitUpdate}

@@ -14,6 +14,7 @@ import PaymentScreen from "./pages/paymentpage/PaymentScreen";
 import PlaceOrder from "./pages/placeorderpage/PlaceOrder";
 import ProductListScreen from "./pages/productlistpage/ProductListScreen";
 import ProductScreen from "./pages/productpage/ProductScreen";
+import ProfileScreen from "./pages/profilepage/ProfileScreen";
 import RegisterScreen from "./pages/registerPage/RegisterScreen";
 import ShippingScreen from "./pages/shippingpage/ShippingScreen";
 import UsersListScreen from "./pages/userslistpage/UsersListScreen";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/product/new-product" element={<CreateProductScreen/>}/>
             <Route path="/product/edit/:id" element={<EditProductScreen/>}/>
             <Route path="/admin/orderlist" element={<OrderListScreen/>}/>
+            <Route path="/user-profile/:id" element={<ProfileScreen/>}/>
 
             <Route path="*" element={<main>This page is not routed yet</main> }/>
           {/* </Route> */}

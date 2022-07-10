@@ -23,10 +23,10 @@ const Product = ({product}) => {
         <span className="card--title"><strong>Price: </strong></span>
         <p style={{fontWeight:'bold'}}>&#8358;{(product.price).toLocaleString()}</p>
       </div>
-      <div className="card--element card--rating card--element-2">
-        <span className="card--title"><strong>Rating: </strong></span>
+      <div className="card--rating">
+        <p className="card--title"><strong>Rating: </strong></p>
         <Rating product={product}/>
-        <span>{product && product.numReviews} reviews</span> 
+        <p>{product && product.numReviews} reviews</p> 
       </div>
     </div>
   )

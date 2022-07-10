@@ -18,6 +18,14 @@ code {
 html {
   font-size: 62.5%;
   box-sizing: inherit;
+  // scroll-behavior: smooth;
+  @media only screen and (max-width: $bp-1000){
+    font-size: 50%;
+  }
+
+  @media only screen and (max-width){
+    font-size: 40%;
+  }
 }
 
 *, *::after, *::before {
@@ -29,5 +37,9 @@ html {
 .contains{
   display: grid;
   grid-template-columns:[full-start] minmax(3vw, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 8vw) [col-end]) [center-end] minmax(3vw, 1fr) [full-end];
-  // grid-template-columns:[full-start] minmax(3rem, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 14.4rem) [col-end]) [center-end] minmax(3rem, 1fr) [full-end];
+  
+  // @media only screen and (max-width: $bp-800){
+  //   grid-template-columns:[full-start] minmax(5rem, 1fr) [first-end] repeat(10, [col-start] minmax(min-content, 8vw) [col-end]) [center-end] minmax(5rem, 1fr) [full-end];
+  // }
+ 
 }

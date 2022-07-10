@@ -29,9 +29,6 @@ app.use('/api/products', productRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/order', orderRoutes)
 
-// app.get('/api/config/paypal', (req, res)=>{
-//   res.send(process.env.PAYPAL_CLIENT_ID)
-// })
 const __dirname = path.resolve()
 if (process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, '/frontend/build')))
