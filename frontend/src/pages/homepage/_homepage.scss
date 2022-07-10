@@ -59,7 +59,7 @@
 
 .card {
   min-width: 28rem;
-  @include bs;
+  background-color: #f2f2f2;
   display: grid;
   position: relative;
   padding: 1rem 1rem;
