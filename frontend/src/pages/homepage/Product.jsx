@@ -26,7 +26,14 @@ const Product = ({product}) => {
       <div className="card--rating">
         <p className="card--title"><strong>Rating: </strong></p>
         <Rating product={product}/>
-        <p>{product && product.numReviews} reviews</p> 
+        <p>
+          {product && product.numReviews > 1? 
+          `${product && product.numReviews} reviews`
+          :
+          `${product && product.numReviews} review`
+          }
+        
+        </p> 
       </div>
     </div>
   )
