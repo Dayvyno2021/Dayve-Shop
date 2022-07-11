@@ -3,6 +3,7 @@
   margin-top: 5rem;
   min-height: 75vh;
   font-size: 1.4rem;
+  overflow-x: scroll;
   
   @media only screen and (max-width: $bp-800){
     grid-column: 1 /-1;
