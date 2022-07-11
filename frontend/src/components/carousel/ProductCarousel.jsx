@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, memo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { highRatedAction } from '../../actions/productActions';
 import Spinner from  '../../components/spinner/Spinner';
@@ -27,7 +27,7 @@ const ProductCarousel = () => {
     }
     slides[slideIndex-1].style.display = "block";  
     dots[slideIndex-1].className += " active";
-    setTimeout(showSlides, 3000); // Change image every 2 seconds
+    setTimeout(showSlides, 3000); // Change image every 3 seconds
   }
 
   useEffect(()=>{
@@ -71,4 +71,4 @@ const ProductCarousel = () => {
   )
 }
 
-export default ProductCarousel
+export default memo(ProductCarousel);

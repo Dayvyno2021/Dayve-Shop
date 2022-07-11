@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 
 function Alert({message, handleClick}){
 
@@ -18,4 +18,4 @@ function Alert({message, handleClick}){
 Alert.prototype={
   message: "Error Occured"
 }
-export default Alert
+export default memo(Alert);

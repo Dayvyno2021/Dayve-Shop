@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import ReactDOM from 'react-dom';
 const modalRoot = document.getElementById('modal');
 
@@ -24,4 +24,4 @@ class Modal extends React.Component {
   }
 }
 
-export default Modal;
+export default memo(Modal);

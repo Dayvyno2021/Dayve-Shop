@@ -1,4 +1,4 @@
-import React from 'react'
+import {memo} from 'react'
 
 const Rating = ({product}) => {
   return (
@@ -60,4 +60,4 @@ const Rating = ({product}) => {
 //   color: 'red'
 // }
 
-export default Rating
+export default memo(Rating);

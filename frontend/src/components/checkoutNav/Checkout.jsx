@@ -1,4 +1,5 @@
 import {Link, Outlet} from 'react-router-dom';
+import { memo } from 'react';
 
 const Checkout = ({step1, step2, step3, step4}) => {
   return (
@@ -64,4 +65,4 @@ const Checkout = ({step1, step2, step3, step4}) => {
   )
 }
 
-export default Checkout;
+export default memo(Checkout);

@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import { Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { logoutAction } from '../../actions/userActions';
@@ -66,4 +66,4 @@ const NavbarScreen = ({handleShowNav}) => {
   )
 }
 
-export default NavbarScreen
+export default memo(NavbarScreen);

@@ -1,8 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import {memo} from 'react'
+import { Link} from 'react-router-dom';
 
 const Pagination = ({pages}) => {
-
 
   return (
     <div className='pagination'>
@@ -10,7 +9,7 @@ const Pagination = ({pages}) => {
           {
             [...Array(pages).keys()].map((x)=>(
               <Link to={`/page/${x+1}`} key={x+1}  >
-                <button className={`pagination--button`} >
+                <button className={`pagination--button pagination--inactive`}>
                   {x+1} 
                 </button>
               </Link>
@@ -21,4 +20,4 @@ const Pagination = ({pages}) => {
   )
 }
 
-export default Pagination
+export default memo(Pagination);

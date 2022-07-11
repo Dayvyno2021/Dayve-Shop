@@ -3,8 +3,16 @@
   display: block;
   text-align: center;
 
-  &--button{
+  &--active{
+    background-color: green;
+  }
+
+  &--inactive {
     background-color: $color-primary-light;
+  }
+
+  &--button{
+    // background-color: $color-primary-light;
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 0.5rem;
@@ -14,8 +22,8 @@
     &:hover{
       background-color: $color-primary-dark;
     }
-    &:active, &:focus{
-      background-color: $color-primary-dark;
-    }
+    // &:active, &:focus{
+    //   background-color: $color-primary-dark;
+    // }
   }
 }

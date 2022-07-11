@@ -1,10 +1,9 @@
-// import React, {useState} from 'react';
+import {memo} from 'react';
 import { Link} from 'react-router-dom';
 import Rating from './Rating';
 // import PropTypes from 'prop-types'
 
 const Product = ({product}) => {
-
 
   return (
     <div className='card' >
@@ -39,4 +38,4 @@ const Product = ({product}) => {
   )
 }
 
-export default Product
+export default memo(Product);

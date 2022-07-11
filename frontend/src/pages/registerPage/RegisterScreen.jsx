@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { userRegisterAction } from '../../actions/userActions';
 import Spinner from '../../components/spinner/Spinner';
 import Alert from '../../components/alert/Alert'
+import { useCallback } from 'react';
 
 const RegisterScreen = () => {
 
@@ -15,9 +16,14 @@ const RegisterScreen = () => {
 
   const [input, setInput] = useState({});
   const [alert, setAlert] = useState(false)
-  const handleClick = () =>{
+
+  // const handleClick = () =>{
+  //   setAlert(false)
+  // }
+
+  const handleClick = useCallback(()=>{
     setAlert(false)
-  }
+  },[])
 
   const userRegisterReducer = useSelector((state)=>state.userRegisterReducer);
   const {loading, userDetails, error} = userRegisterReducer;

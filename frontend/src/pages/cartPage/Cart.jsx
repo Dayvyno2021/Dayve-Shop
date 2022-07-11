@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCartAction } from '../../actions/cartActions';
 import { Link } from 'react-router-dom';
@@ -44,4 +44,4 @@ const Cart = ({cartItem, deleteFromCart}) => {
   )
 }
 
-export default Cart
+export default memo(Cart);

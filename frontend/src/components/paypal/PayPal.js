@@ -1,5 +1,4 @@
-import React from "react";
-// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import {memo} from "react";
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 function PayPal({children}) {
@@ -16,4 +15,4 @@ function PayPal({children}) {
   );
 }
 
-export default PayPal;
+export default memo(PayPal);

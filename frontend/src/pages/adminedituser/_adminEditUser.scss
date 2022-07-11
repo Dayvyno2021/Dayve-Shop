@@ -1,9 +1,18 @@
 .adminsingleuser--container{
-  grid-column: col-start 3/span 6;
+  grid-column: col-start 2/span 8;
   padding: 2rem 10rem;
   padding-top: 5rem;
+  margin-top: 3rem;
   min-height: 70vh;
   font-size: var(--font16);
+
+  @media only screen and (max-width: $bp-800){
+    grid-column: col-start 1/span 10;
+  }
+  @media only screen and (max-width: $bp-490){
+    grid-column: 1/-1;
+    padding: 2rem 6rem;
+  }
 }
 
 .singleuser--heading{

@@ -70,7 +70,7 @@ const PlaceOrder = () => {
           {cartItems.map((cartItem)=>(
             <div className="cart--items" key={cartItem.product}>
               <Link to={`/product/${cartItem.product}`}>
-                <img src={cartItem.image} alt="" className="cart--image" />
+                <img src={cartItem && cartItem.img? `/api/products/get/${cartItem.product}`: cartItem.image} alt="" className="cart--image" />
               </Link>
               <Link to={`/product/${cartItem.product}`} className='link2'>
                 <p className="">{cartItem.name}</p>

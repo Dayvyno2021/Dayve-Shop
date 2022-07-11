@@ -20,6 +20,23 @@ const HomePageScreen = () => {
   const productListReducer  = useSelector((state)=>state.productListReducer);
   const {loading, products, error, pages} = productListReducer;
 
+
+  //Function to Render the pagination box
+  const active = params.id || 1;
+  const activatePage = () => {
+    const paginations = document.getElementsByClassName('pagination--button');
+    for (let i=0; i<paginations.length; i++){
+      if (String(paginations[i].innerHTML)===String(active)){
+        paginations[i].classList.remove('pagination--inactive');
+        paginations[i].classList.add('pagination--active');
+      } else {
+        paginations[i].classList.remove('pagination--active');
+        paginations[i].classList.add('pagination--inactive');
+      }
+    }
+  }
+  activatePage();
+
   useEffect(() => {
     dispatch(productListAction(filter, params.id));
   }, [dispatch, filter, params.id])
